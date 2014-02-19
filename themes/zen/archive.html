@@ -17,9 +17,9 @@
 			<ol reversed="reversed">
 
 			{% for page in pages %}
-			{% if page.date and not(page.url == base_url~'/') %}
+			{% if page.meta.date  %}
 
-			<li><h4><span class="meta-date-archive">{{ page.date }}</span>  <a href="{{ page.url }}">{{ page.title }}</a></h4></li>
+			<li><h4><span class="meta-date-archive">{{ page.meta.date }}</span>  <a href="{{ page.url }}">{{ page.title }}</a></h4></li>
 
 			{% endif %}
 			{% endfor %}
