@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <!-- for IE10 -->
+
+    <title>Работает!</title>
+
+{% if meta.description %}
+    <meta name="description" content="{{ meta.description }}">
+{% endif %}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" href="{{ base_url }}/../favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/blog/themes/pure/styles/pure-min.css">
+    <link rel="stylesheet" href="{{ theme_url }}/styles/navigataur.css">
+    <link rel="stylesheet" href="{{ base_url }}/styles/idea.css">
+    <link rel="stylesheet" href="{{ theme_url }}/styles/main.css">
+</head>
+
+<body>
+    <div id="container" class="pure-g-r">
+        <div class="sidebar pure-u">
+            <a href="{{ base_url }}">
+                <img src="{{ theme_url }}/images/logo.png" alt="{{ site_title }}" width=128 height=128 />
+            </a>
+            <div class="pure-menu pure-menu-open pure-menu-custom header">
+                <ul class="menu">
+{% for page in pages %}{% if not(page.date) and not(page.url == base_url~'/') %}
+                    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+{% endif %}{% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="pure-u-1">
+            <div id="content">
+{% if is_front_page %}
+
+<!-- // wtf -->
+
+{% else %}
+
+                <div class="post">
+			{% if meta.title %}
+			<h1>{{ meta.title }}</h1>
+			{% endif %}
+
+			{% if meta.date %}
+			<p class="meta">Published {{ meta.date_formatted }}</p>
+			{% endif %}
+
+			{% spaceless %}{{ content }}{% endspaceless %}
+		</div>
+		<hr />
+
+		<p> test
+		prev title: {{ prev_page.title }}<br>
+		link: {{ prev_page.url }}<br>
+		by: {{ prev_page.author }}<br>
+		date: {{ prev_page.date_formatted }}<br>
+		</p>
+
+{% if next_page %}
+		<p> test
+		prev title: {{ next_page.title }}<br>
+		link: {{ next_page.url }}<br>
+		by: {{ next_page.author }}<br>
+		date: {{ next_page.date_formatted }}<br>
+		</p>
+{% endif %}
+
+{% endif %}
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

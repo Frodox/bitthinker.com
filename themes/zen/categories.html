@@ -1,0 +1,32 @@
+<html>
+<body>
+
+	current page:
+	{%  set u = current_page.url %}<br>
+	{# remove trailing `/index` and leading `slash` #}
+	{% set u = u|replace({'/index':''})  %}
+	{% set u = u[1:] %}
+
+	{{ u }}<br>
+	{{ meta.title }}
+	<hr>
+
+        {# loop through all the pages #}
+        {% for page in pages %}
+
+            {# show only pages that match this page URL structure #}
+            {# and don't show the index file in this folder #}
+            {# and in subfolders (doesn't end with 'index' )#}
+
+		{% if u in page.url and page.url[-5:] != 'index' %}
+
+                <li><a href="{{base_url}}/{{ page.url }}">{{ page.title }}</a></li>
+                <li><a href="{{base_url}}/{{ page.url }}">{{base_url}}/{{ page.url   }}</a></li>
+                <hr>
+
+		{% endif %}
+
+        {% endfor %}
+
+</body>
+</html>

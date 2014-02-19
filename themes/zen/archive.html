@@ -1,0 +1,36 @@
+{% include 'header.html' %}
+
+<body>
+<div id="container" class="pure-g-r">
+<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->
+	<header id="logo-container">
+		<div id="logo-text"><a href="/blog" title="goto Blog main page">Zen Notes</a></div>
+		<div id="logo-subtext">Cogitatio materialis est</div>
+	</header>
+
+	{% include 'navigation.html' %}
+
+	<div id="content">
+		<div class="post">
+			<h1>{{ meta.title }}</h1>
+
+			<ol reversed="reversed">
+
+			{% for page in pages %}
+			{% if page.date and not(page.url == base_url~'/') %}
+
+			<li><h4><span class="meta-date-archive">{{ page.date }}</span>  <a href="{{ page.url }}">{{ page.title }}</a></h4></li>
+
+			{% endif %}
+			{% endfor %}
+
+			</ol>
+			<br>
+		</div>
+	</div> <!-- content -->
+</div> <!-- container -->
+
+{% include 'footer.html' %}
+
+</body>
+</html>

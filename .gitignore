@@ -15,7 +15,7 @@ Thumbs.db
 *.swp
 
 # User themes
-themes/*
+# themes/*
 !themes/index.html
 !themes/default/*
 

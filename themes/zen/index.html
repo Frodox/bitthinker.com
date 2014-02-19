@@ -1,0 +1,81 @@
+{% include 'header.html' %}
+
+<!--
+read http://stackoverflow.com/questions/6771258/whats-the-difference-if-meta-http-equiv-x-ua-compatible-content-ie-edge-e
+to configure your web-server correctly
+-->
+
+<body>
+<div id="container" class="pure-g-r">
+<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->
+	<header id="logo-container">
+		<div id="logo-text"><a href="/blog" title="goto Blog main page">Zen Notes</a></div>
+		<div id="logo-subtext">Cogitatio materialis est</div>
+	</header>
+
+	{% include 'navigation.html' %}
+
+
+	<!-- B L O C K   W I T H   P O S T -->
+	<div id="content">
+
+
+{% if current_page.title == 'Welcome' %}
+	<!-- P O S T   L O O P -->
+
+	{% for page in pages %}
+	{% if page.meta.date %}
+
+		<div class="post">
+
+			<h2><a href="{{ page.url }}">{{ page.meta.title }}</a></h2>
+			<div class="excerpt">{{ page.content|striptags|slice(0, 300) }}...</div>
+
+			<div class="meta">
+				<span class="meta-date">{{ page.meta.date|date(config.date_format) }}</span>
+				{% if page.meta.tags %}<span class="meta-tags">Tags: {{ page.meta.tags }}</span>{% endif %}
+			</div>
+		</div>
+	{% endif %}
+	{% endfor %}
+
+
+{% else %}
+	<!-- O N E   P O S T -->
+
+		<div class="post">
+			<h1>{{ meta.title }}</h1>
+
+			<div class="meta">
+
+				{% if meta.date %}
+				<span class="meta-date">{{ meta.date|date(config.date_format) }}</span>
+				{% endif %}
+
+				{% if meta.tags %}
+				<span class="meta-tags">Tags: {{ meta.tags }}</span>
+				{% endif %}
+
+			</div>
+
+			{% spaceless %}{{ content }}{% endspaceless %}
+		</div>
+
+
+{% if meta.type != 'service' %} {# enable only for not service pages/ #}
+	<div id="post-end">&nbsp;</div>
+
+	<!-- Disquse Comments -->
+	{# and here INCLUDE file with code of disqus comments #}
+
+
+{% endif %}
+
+{% endif %}
+	</div> <!-- content -->
+</div> <!-- container -->
+
+{% include 'footer.html' %}
+
+</body>
+</html>
