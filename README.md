@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-bitthinker.com
-==============
-
-repo for bitthinker.com -- blog part
-=======
 Phile
 =====
 
@@ -61,4 +55,3 @@ Help make Phile better by checking out the GitHub repoistory and submitting pull
 If you find a bug please report it on the [issues page](https://github.com/PhileCMS/Phile/issues).
 
 If you create a plugin please add it to the [Plugin Wiki](https://github.com/PhileCMS/Phile/wiki/Plugins).
->>>>>>> 1ad8ace2dadd8a01a7dbd96136ca40233a25107e
