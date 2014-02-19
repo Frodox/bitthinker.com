@@ -20,6 +20,7 @@ Thumbs.db
 !themes/default/*
 
 config.php
+!plugins/*/config.php
 
 # PHPStorm settings
 .idea
