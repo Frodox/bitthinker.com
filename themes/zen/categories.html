@@ -1,16 +1,19 @@
 <html>
+<head>
+	<title>{{ meta.title }}</title>
+</head>
 <body>
-
-	current page:
-	{%  set u = current_page.url %}<br>
+	<!-- current page: -->
+	{%  set u = current_page.url %}
 	{# remove trailing `/index` and leading `slash` #}
 	{% set u = u|replace({'/index':''})  %}
 	{% set u = u[1:] %}
 
-	{{ u }}<br>
-	{{ meta.title }}
-	<hr>
+	{#{ u }#}
+	{#{ meta.title }#}
 
+	<p>Articles in category: {{ meta.title }} </p>
+	<ul>
         {# loop through all the pages #}
         {% for page in pages %}
 
@@ -20,13 +23,11 @@
 
 		{% if u in page.url and page.url[-5:] != 'index' %}
 
-                <li><a href="{{base_url}}/{{ page.url }}">{{ page.title }}</a></li>
-                <li><a href="{{base_url}}/{{ page.url }}">{{base_url}}/{{ page.url   }}</a></li>
-                <hr>
+			<li><a href="{{base_url}}/{{ page.url }}">{{ page.title }}</a></li>
 
 		{% endif %}
 
-        {% endfor %}
-
+	{% endfor %}
+	</ul>
 </body>
 </html>
