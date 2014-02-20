@@ -1,5 +1,5 @@
 <!--
-Title: Как перенести cache Google Chrome на другой диск&nbsp;/&nbsp;папку&nbsp;?
+Title: Как перенести кэш Google Chrome на другой диск&nbsp;/&nbsp;папку&nbsp;?
 Description: Вы - счастливый обладатель SSD и волнуетесь о своём диске? :) Перенести кэш Google Chrome - правильное решение, и в данной статье я покажу как это сделать.
 Date: 2012/10/04
 Tags: chrome, hacks
