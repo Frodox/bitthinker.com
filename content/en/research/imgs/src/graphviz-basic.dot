@@ -1,0 +1,7 @@
+digraph my_first_graph {
+    A -> B [ label = "Edge A to B" ];
+    B -> C [ label = "Edge B to C" ];
+    A [label="Node A"];
+    A -> {C ; D}
+}
+
