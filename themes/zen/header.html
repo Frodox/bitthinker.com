@@ -6,7 +6,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<base href="{{ base_url }}/" />
+	<base href="{{ base_url }}{{ current_page.url }}" target="_self">
 	<link rel="canonical" href="{{ base_url }}{{ current_page.url }}" />
 	<meta http-equiv="Cache-control" content="public">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <!-- for IE10 -->
@@ -15,7 +15,7 @@
 
 	<meta property="og:site_name" content="Zen Notes">
 	<meta property="og:url" content="{{ base_url }}">
-	 <meta itemprop="url" content="{{ current_page.url }}">
+	<meta itemprop="url" content="{{ current_page.url }}">
 <!-- 	<meta itemprop="email" content="{{ config.email }}"> -->
 
 	<meta name="description"        content="{{ meta.description }}">

@@ -22,7 +22,7 @@ Tags: chrome, hacks
 
 В Windiws 7 хром по умолчанию хранит кэш где-то в районе
 `C:\Users\username\AppData\Local\Google\Chrome\User Data\Default\Cache`.
-(Для других ОС см. [Источники](!#resources))
+(Для других ОС см. [Источники](#resources))
 
 Для изменения метоположени кэша **на постоянно**, требуется выполнить следующие шаги:
 
