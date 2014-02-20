@@ -16,7 +16,8 @@ html, body {
 }
 body {
 	color: #333;
-	background-color: #efefef;
+/* 	background-color: #efefef; */
+	background-image: url('../images/bg1.gif');
 	font-size: 20px;
 	font-family: 'Noto Sans', sans-serif;
 }
@@ -109,7 +110,7 @@ nav a, nav a:visited { color: #aaa }
 		-moz-transition: all 0.2s;
 		-ms-transition: all 0.2s;
 		-o-transition: all 0.2s;
-		transition: all 0.2s; 
+		transition: all 0.2s;
 	}
 
 		nav > ul > li > a:link {
