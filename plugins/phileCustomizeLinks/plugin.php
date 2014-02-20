@@ -5,11 +5,13 @@
  *
  * Use it, if you want to add extra params to external links.
  * Now available: rel="nofollow" and target="_blank" (both enabled by default)
- * 
+ *
  * @author Christian Evans <Christian@bitthinker.com>
- * @version 1.0
+ * @version 1.1
  * @link https://github.com/Jecomire/phileCustomizeLinks
  * @license http://opensource.org/licenses/MIT
+ *
+ * ts: 8
  */
 
 class PhileCustomizeLinks extends \Phile\Plugin\AbstractPlugin implements \Phile\EventObserverInterface
@@ -37,7 +39,7 @@ class PhileCustomizeLinks extends \Phile\Plugin\AbstractPlugin implements \Phile
 			 **/
 
 			$dom = new DOMDocument();
-			// oh.. bugging DomDocument
+			// convert to neitral 'html-entities' first
 			$rightEncodingHtml = mb_convert_encoding($content, 'HTML-ENTITIES', $this->settings["encoding"]);
 			$dom->loadHTML( $rightEncodingHtml );
 
@@ -60,7 +62,12 @@ class PhileCustomizeLinks extends \Phile\Plugin\AbstractPlugin implements \Phile
 				$a_tag->setAttribute("rel",    $this->settings["rel"]);
 			}
 
-			$data['content'] = $dom->saveHTML();
+			$tmp  = preg_replace('/^<!DOCTYPE.+?>/', ''
+				, str_replace(    array('<html>', '</html>', '<body>', '</body>')
+						, array('', '', '', '')
+				, $dom->saveHTML()));
+			// convert encoding back
+			$data['content'] = mb_convert_encoding($tmp, $this->settings["encoding"], 'HTML-ENTITIES');
 		}
 	}
 
@@ -69,6 +76,8 @@ class PhileCustomizeLinks extends \Phile\Plugin\AbstractPlugin implements \Phile
  * Get domain name from URL.
  * Seems to return *with* subdomain.
  *
+ * @url
+ * 	just any URL
  * @return
  * 	domain_name, if success
  * 	false, otherwise
