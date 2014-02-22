@@ -2300,7 +2300,17 @@ abstract class _MarkdownExtra_TmpImpl extends \Michelf\Markdown {
 			}
 			if (isset($this->ref_attr[$link_id]))
 				$result .= $this->ref_attr[$link_id];
-		
+
+
+			/* check $url, if it external(absolute) or local(relative), so
+			 * do nothing, if $url is local:
+			 * starts with '/' or '#'
+			 **/
+			if ( $url[0] != '/' && $url[0] != '#' )
+			{
+				$result .= 'rel="nofollow" target="_blank"';
+			}
+
 			$link_text = $this->runSpanGamut($link_text);
 			$result .= ">$link_text</a>";
 			$result = $this->hashPart($result);
@@ -2326,7 +2336,17 @@ abstract class _MarkdownExtra_TmpImpl extends \Michelf\Markdown {
 			$result .=  " title=\"$title\"";
 		}
 		$result .= $attr;
-		
+
+
+		/* check $url, if it external(absolute) or local(relative), so
+		 * do nothing, if $url is local:
+		 * starts with '/' or '#'
+		 **/
+		if ( $url[0] != '/' && $url[0] != '#' )
+		{
+			$result .= 'rel="nofollow" target="_blank"';
+		}
+
 		$link_text = $this->runSpanGamut($link_text);
 		$result .= ">$link_text</a>";
 
