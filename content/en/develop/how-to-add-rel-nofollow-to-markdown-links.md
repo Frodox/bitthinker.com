@@ -1,62 +1,59 @@
 <!--
 Title: How to customize markdown link syntax?
 Description: Short article about 2 ways of modifying markdown syntax (by php-plugin and by editing php-parser) for adding extra syntaz in html a-tags.
-Tags: php, markdown, hacks
+Tags: php, markdown, hacks, development
 Date: 2013/11/01
 -->
 
-On my blog I have a lot of links on other sites. But it's good to use `rel="nofollow"`
-if you add a link on untrusted site. Since I use MarkDown, I find a way to customize
-MarkDown's link syntax to allow this extra attributes for html `a` tags<!--cut-here-->.
+On my blog I have a lot of links on other sites. But it's good practice to use `rel="nofollow"`
+if you add a link on untrusted site. Since I write articles in markdown, I find a way to customize
+markdown's parser behevioure to allow this extra attributes for html `<a>` tags<!--cut-here-->.
 
 
+## Idea
 
-## Method #1 (php only, prefered)
+The idea is deadly simple -- just loop through all links, and if it is external one,
+add `rel="nofollow" target="_blank"`. Which one is external? You can decide it for yourself.
+For example, change syntax by adding `!` before URLs and check for that  
+(`[1]:!http://my-site.com/article1`) and so on. My variant is below.
+
+Link **is** external, if it is not relative/local :) So I do nothing if `href`:
+
+* starts with `/` (relative links)
+* starts with `#` (anchors links)
+
+In result I have at least two ways to do that.
+
+
+## Method #1 (php only)
 
 If you use some flatfile CMS, like [Pico][pico-git] or [Phile][phile-git] or anything else,
 it's a good practice to write a plugin. Since it's easy to realize with clean php, let's do it.
 
 
 
-### Idea
-
-The idea is deadly simple - just loop through all links, and if it is external one,
-add `rel="nofollow" target="_blank"`. Which one is external? You can decide by yourself.
-My variant is below.
-
-Link **is not** external, if `href`:
-
-* starts with `/` (for relative links)
-* starts with `#` (for anchors links)
-* contain base site url (like `site.com`)
-
-
 ### Code it
 
-So, my plugin for Phile is on [github][phileCustomizeLinks], and here is some demo-code:
+My resulting plugin for PhileCMS is on [github][phileCustomizeLinks], and here is some demo-code:
 
 ```php
 /**
  * Customize links in document.
- * 
+ *
  * Use it, if you want to add extra params to external links.
  * Now available: rel="nofollow" and target="_blank".
  *
  * Modify <a> tags, if find any.
  * Don't edit, if "href":
  * * starts with '/', '#'
- * * contain 'domain' name
  **/
 // ...
-$content  = "get here your page's html-content";
-$domain   = "site.com";  // your domain
-$encoding = "UTF-8";     // encoding of your files and texts
+$content  = 'your page content';
+$content_ecoding = '<YOUR CONTENT ENCODING>'; // like 'UTF-8'
 
 $dom = new DOMDocument();
-// oh.. bugging DomDocument
-$rightEncodingHtml = mb_convert_encoding($content,
-			'HTML-ENTITIES',
-			encoding);
+// convert to neutral 'html-entities' encoding first
+$rightEncodingHtml = mb_convert_encoding($content, 'HTML-ENTITIES', $content_ecoding);
 $dom->loadHTML( $rightEncodingHtml );
 
 foreach ( $dom->getElementsByTagName("a") as $a_tag )
@@ -67,20 +64,36 @@ foreach ( $dom->getElementsByTagName("a") as $a_tag )
 	$href_url = $a_tag->getAttribute("href");
 	$start_with_slash = ($href_url[0] == '/') ? true : false;
 	$start_with_hash  = ($href_url[0] == '#') ? true : false;
-	// case sensetive...
-	$contain_domain = (substr_count($href_url, $domain) >= 1) ? true : false;
 
-	if ($start_with_slash || $contain_domain || $start_with_hash)
+	if ($start_with_slash || $start_with_hash)
 		continue;
 
-	// echo "external url: " . $href_url . "\n<br>";
 	$a_tag->setAttribute("target", "_blank");
 	$a_tag->setAttribute("rel",    "nofollow");
 }
 
-// profit:
-$content = $dom->saveHTML();
+$tmp  = preg_replace('/^<!DOCTYPE.+?>/'
+	, ''
+	, str_replace(array('<html>', '</html>', '<body>', '</body>')
+			, array('', '', '', '')
+	, $dom->saveHTML()));
+
+// convert encoding back
+$content = mb_convert_encoding($tmp, $content_ecoding, 'HTML-ENTITIES');
 // ...
+```
+
+#### Prons
+
+```diff
++ Need not to edit cms/parser core
+```
+
+#### Cons
+
+```diff
+- `saveHTML()` method will complement your code to *correct* html, with DOCTYPE, all closed tags and so on. Is it desired behaviore for you?
+- If you use not-latin text, you should encode it explicitly into html-enteties and then back. If you use some html-code examples encoded into 'html-enteties', they will become back just html
 ```
 
 * * *
@@ -89,112 +102,91 @@ $content = $dom->saveHTML();
 
 ## Method #2 (edit php-markdown parser)
 
-If you cannot write a plugin, but can/want to modify a php-markdown parser... let's do it :)
-
-
-
-### Result
-
-The result first. If you write a link like
-
-    [some-site](http://some-site.com)
-    //or
-    [some-site][1]
-    [1]:http://some-site.com
-
-
-the resulting html would be:
-
-	<a rel="nofollow" target="_blank" href="some-site.com">some-site</a>
-
-**But**, if you type:
-
-```markdown
-[article1][1]
-[1]:!http://my-site.com/article1
-# Important: '!' -- means URL is trusted
-# You could swap behaviour if you want
-```
-
-the result would be just:
-
-    <a href="http://my-site.com/article1">article1</a>
-
+If you cannot write a plugin or cons of method#1 is critical for you, let's do it deeper and simpler
+-- during parsing `.md` and generating `html`-code.
 
 
 ### Code it
 
-Well, let's look at [php-markdown][2] library
-(if you use another parser for MarkDown - idea is the same):
+If you look at [php-markdown][2] library
+(if you use another markdown-parser -- idea is the same):
 
-* we need to have one extra check, that if URL starts with `!`, then do nothing
-* otherwise - add `rel="nofollow"` and `target="_blank"` attributes to `<a>` tag
-
-There're two functions:
+There are two functions:
 
 * `_doAnchors_reference_callback($matches)`
 * `_doAnchors_inline_callback($matches)`
 
 for links-reference and inline-links respectively.
 
-Since I use php-MarkDownExtra, I edited [this][3] and [this][4] one function.
+> *NOTE*: actually, there are 4 functins, 2 for php-markdown and 2 for php-markdownExtra with a little bit difference. Patch the one you are using.
 
-Resulting commits look like:
+Since I use php-markdownExtra, I edited [this][3] and [this][4] one function.
 
-<pre><code class="diff">
-<a target="_blank" rel="nofollow" title="commit: Modify MarkDown URL syntax: add rel=nofolow and target=_blank for..." href="https://github.com/Jecomire/php-markdown/commit/6d68c963cf2e76b54becbcd2004c20e76a254009">see this on github</a>
-@@ -2278,8 +2278,20 @@ protected function _doAnchors_reference_callback($matches) {
-      if (isset($this-&gt;urls[$link_id])) {
-            $url = $this-&gt;urls[$link_id];
-            $url = $this-&gt;encodeAttribute($url);
--                                   
--      $result = &quot;&lt;a href=\&quot;$url\&quot;&quot;;
+Resulting commits look like (on [github][my-github-commit]):
+
+```diff
+---
+ Michelf/Markdown.php | 24 ++++++++++++++++++++++--
+ 1 file changed, 22 insertions(+), 2 deletions(-)
+
+diff --git a/Michelf/Markdown.php b/Michelf/Markdown.php
+index 088b7cd..1210fc0 100644
+--- a/Michelf/Markdown.php
++++ b/Michelf/Markdown.php
+@@ -2300,7 +2300,17 @@ protected function _doAnchors_reference_callback($matches) {
+ 		}
+ 		if (isset($this->ref_attr[$link_id]))
+ 			$result .= $this->ref_attr[$link_id];
 +
-+      # if it trusted URL (starts with '!'): just crop the '!'
-+      # otherwise it's outside link: add rel=&quot;nofollow&quot; and target=&quot;_blank&quot;
-+      $result = &quot;&lt;a &quot;;
-+      if ('!' == $url[0])
-+      {
-+          # trusted URL
-+          $url = substr($url, 1);
-+      }
-+      else {
-+          $result .= &quot;rel=\&quot;nofollow\&quot; target=\&quot;_blank\&quot;&quot;;
-+      }
++		/* check $url, if it external(absolute) or local(relative), so
++		 * do nothing, if $url is local:
++		 * starts with '/' or '#'
++		 **/
++		if ( $url[0] != '/' && $url[0] != '#' )
++		{
++			$result .= 'rel="nofollow" target="_blank"';
++		}
 +
-+      $result .= &quot; href=\&quot;$url\&quot;&quot;;
-       if ( isset( $this-&gt;titles[$link_id] ) ) {
-           $title = $this-&gt;titles[$link_id];
-           $title = $this-&gt;encodeAttribute($title);
-</code></pre>
+ 		$link_text = $this->runSpanGamut($link_text);
+ 		$result .= ">$link_text</a>";
+ 		$result = $this->hashPart($result);
 
-<pre><code class="diff"><a target="_blank" rel="nofollow" title="commit: Add same feature for inline links..." href="https://github.com/Jecomire/php-markdown/commit/acdb7dcc9e0e628caf15a1a9e66e7cb4d43688ab">see this on github</a>
-@@ -2319,7 +2319,19 @@ protected function _doAnchors_inline_callback($matches) {
-
-      $url = $this-&gt;encodeAttribute($url);
-
--    $result = &quot;&lt;a href=\&quot;$url\&quot;&quot;;
-+    # if it trusted URL (starts with '!'): just cut the '!'
-+    # otherwise it's outside link: add rel=&quot;nofollow&quot; and target=&quot;_blank&quot;
-+    $result = &quot;&lt;a &quot;;
-+    if ('!' == $url[0])
-+    {
-+        # trusted URL
-+        $url = substr($url, 1);
-+    }
-+    else {
-+        $result .= &quot;rel=\&quot;nofollow\&quot; target=\&quot;_blank\&quot;&quot;;
-+    }
+@@ -2326,7 +2336,17 @@ protected function _doAnchors_inline_callback($matches) {
+ 			$result .=  " title=\"$title\"";
+ 		}
+ 		$result .= $attr;
 +
-+    $result .= &quot; href=\&quot;$url\&quot;&quot;;
-     if (isset($title)) {
-        $title = $this-&gt;encodeAttribute($title);
-        $result .=  &quot; title=\&quot;$title\&quot;&quot;;
-</code></pre>
++		/* check $url, if it external(absolute) or local(relative), so
++		 * do nothing, if $url is local:
++		 * starts with '/' or '#'
++		 **/
++		if ( $url[0] != '/' && $url[0] != '#' )
++		{
++			$result .= 'rel="nofollow" target="_blank"';
++		}
++
+ 		$link_text = $this->runSpanGamut($link_text);
+ 		$result .= ">$link_text</a>";
+-- 
+```
 
+#### Pros
+
+```diff
++ easy to implement
++ no troubles with encodings
++ easy to cache result, if you use some cache-engine for resulting html output
+```
+
+#### Cons
+
+```diff
+- need to edit parser core
+```
 
 ---
 Inspired by [this][1] answer on SO.
+
 
 [1]:http://stackoverflow.com/a/11789091
 (How to customize markdown link syntax)
@@ -213,3 +205,5 @@ Inspired by [this][1] answer on SO.
 [pico-git]:https://github.com/gilbitron/Pico
 
 [phile-git]:https://github.com/PhileCMS/Phile
+
+[my-github-commit]:https://github.com/Jecomire/php-markdown/commit/66d3da7c2c95aab1ff97b6d114d36eceaf9ff44f
