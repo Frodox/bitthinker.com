@@ -35,3 +35,4 @@ temp/cache/*
 # datastorage
 datastorage/*
 !datastorage/.htaccess
+themes/zen/comments.html
