@@ -65,7 +65,7 @@ so, you **should** have the following dir-structure:
 Then, the whole trick **if you are in `workspace` folder** is (be patient):
 
 	$ javac com/bitthinker/Hello.java
-	$ javac com.bitthinker.Hello
+	$ java  com.bitthinker.Hello
 	Hello, Man!
 
 
