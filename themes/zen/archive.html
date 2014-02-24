@@ -10,7 +10,7 @@
 
 	{% include 'navigation.html' %}
 
-	<div id="content">
+	<div id="content" class="archive-content">
 		<div class="post">
 			<h1>{{ meta.title }}</h1>
 
@@ -19,7 +19,7 @@
 			{% for page in pages %}
 			{% if page.meta.date  %}
 
-			<li><h4><span class="meta-date-archive">{{ page.meta.date }}</span>  <a href="{{ page.url }}">{{ page.title }}</a></h4></li>
+			<li><h4 class="archive-item-header"><span class="meta-date-archive">{{ page.meta.date }}</span>  <a href="{{ page.url }}">{{ page.title }}</a></h4></li>
 
 			{% endif %}
 			{% endfor %}

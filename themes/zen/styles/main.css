@@ -44,11 +44,20 @@ h4 { font-size: 1.25em; margin: 1em 0 0.5em 0 }
 h5 { font-size:0.83em; /*margin:1.67em 0*/}
 h6 { font-size:0.67em;/*margin:2.33em 0*/}
 
+h4.archive-item-header {
+	margin: 0 0 0.2em 0;
+}
+
+#container div.archive-content {
+	width: 900px;
+}
 
 #content, body > footer .inner {
 	width: 800px;
 	margin: 0 auto;
 }
+
+
 
 #container {
 	width: 100%;
@@ -294,7 +303,7 @@ pre > code {
 
 @media only screen and (max-width: 850px)
 {
-	#content, body > footer .inner {
+	#content, body > footer .inner, #container div.archive-content {
 		width: 100%;
 	}
 	.post, body > footer .inner {

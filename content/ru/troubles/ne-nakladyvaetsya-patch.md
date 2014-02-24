@@ -1,6 +1,6 @@
 <!--
-Title: Не накладывается patch на rpm пакет - неверный код возврата из /var/tmp/rpm-tmp
-Description: Не накладывается patch на rpm пакет - неверный код возврата из /var/tmp/rpm-tmp
+Title: Не накладывается patch на rpm пакет - неверный код возврата
+Description: Не накладывается patch на rpm пакет -- неверный код возврата из /var/tmp/rpm-tmp
 Date: 2013/04/25
 Tags: troubles, patch
 -->
