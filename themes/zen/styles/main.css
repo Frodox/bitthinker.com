@@ -16,7 +16,6 @@ html, body {
 }
 body {
 	color: #333;
-/* 	background-color: #efefef; */
 	background-image: url('../images/bg1.gif');
 	font-size: 20px;
 	font-family: 'Noto Sans', sans-serif;
@@ -39,9 +38,9 @@ h3 a, h3 a:visited
 h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover { color:#008d8d; }
 
 h1 { font-size: 2.5em;/*margin:.67em 0*/}
-h2 { font-size: 1.85em; margin: 1em 0 0.5em 0 }
-h3 { font-size: 1.32em; margin: 1em 0 0.5em 0 }
-h4 { font-size:1em; /*margin:1.33em 0*/}
+h2 { font-size: 2.0em; margin: 1em 0 0.5em 0 }
+h3 { font-size: 1.5em; margin: 1em 0 0.5em 0 }
+h4 { font-size: 1.25em; margin: 1em 0 0.5em 0 }
 h5 { font-size:0.83em; /*margin:1.67em 0*/}
 h6 { font-size:0.67em;/*margin:2.33em 0*/}
 
@@ -70,11 +69,11 @@ h6 { font-size:0.67em;/*margin:2.33em 0*/}
 	padding: 2em 0 2em 0;
 }
 #logo-text {
-	font-size: 2.7em;
+	font-size: 2.9em;
 	font-weight: 700;
 }
 #logo-subtext {
-	font-size: 1.3em;
+	font-size: 1.4em;
 	margin-top: -0.3em;
 }
 #logo-container a, #logo-container a:visited { display: block; color:#00a498; }
