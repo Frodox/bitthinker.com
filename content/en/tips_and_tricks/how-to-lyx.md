@@ -5,8 +5,11 @@ Date: 2014/02/25
 Tags: LyX, tips and tricks
 -->
 
+In this article I will describe interesting hack and possibilities which I use 
+from time to time in LyX<!--cut-here-->.
 
-### How to set custom setting for all program listings ?
+
+### How to set custom settings for all program listings ?
 
 If you exhausted to setup every code-listing you have, 
 you can set default parameters for all existed and future ones:
@@ -17,6 +20,7 @@ you can set default parameters for all existed and future ones:
 I have used only `basicstyle={\ttfamily}` -- use *Typewriter* font all the time,
 but you can easily find other necessary settings in the 
 [listings package doc][listing-package-man] and in the web.
+
 
 
 ### How to create shortcut for *Separator* layout ?
@@ -59,7 +63,10 @@ be marked as **10**, but next element will be marked as **21**.
 Of course, you can use this hack for any item in numbered list.
 
 
+
 ***
+
+
 
 #### References:
 
