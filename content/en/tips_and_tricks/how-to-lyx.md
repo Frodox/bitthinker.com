@@ -6,7 +6,8 @@ Tags: LyX, tips and tricks
 -->
 
 In this article I will describe interesting hack and possibilities which I use 
-from time to time in LyX<!--cut-here-->.
+from time to time in LyX, like default setting for all code listings,
+shortcut for `--Separator--` layout and so on<!--cut-here-->.
 
 
 ### How to set custom settings for all program listings ?
