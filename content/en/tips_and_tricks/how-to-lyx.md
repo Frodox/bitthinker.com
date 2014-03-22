@@ -1,6 +1,6 @@
 <!--
 Title: LyX tips and tricks
-Descriptions: Most common problems and hacks I have ever faced
+Description: Most common problems and hacks I have ever faced
 Date: 2014/02/25
 Tags: LyX, tips and tricks
 -->
