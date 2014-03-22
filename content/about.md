@@ -1,7 +1,7 @@
-/*
-    Title: /about
-    Type: service
-*/
+<!--
+Title: /about
+Type: service
+-->
 
 Hello, I am Christian Evans. I am a software engineer and a photographer.
 
