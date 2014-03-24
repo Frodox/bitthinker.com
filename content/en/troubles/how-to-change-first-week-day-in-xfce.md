@@ -53,8 +53,15 @@ Mo Tu We Th Fr Sa Su
 17 18 19 20 21 22 23
 "24" 25 26 27 28
 ```
-If it works fine for you, just add smth like `LC_TIME="en_GB.UTF-8"` in your
-`~/.bashrc` file.
+If it works fine for you, just add smth like `export LC_TIME="en_GB.UTF-8"` in your
+`~/.bashrc` file or create file `~/.config/xfce4/xinitrc` with content
+
+```bash
+#!/bin/sh
+export LC_TIME="en_GB.UTF-8"
+. /etc/xdg/xfce4/xinitrc
+```
+and run `chmod +x ~/.config/xfce4/xinitrc`; reboot/logout.
 
 > **NOTE:** you can list all available in your system locales with `locale -a`.
 > If some locale isn't installed yet, `LC_TIME` will have no effect.
