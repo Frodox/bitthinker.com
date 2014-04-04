@@ -1,0 +1,3 @@
+[submodule "plugins/phileTags"]
+	path = plugins/phileTags
+	url = git@github.com:Jecomire/phileTags.git
