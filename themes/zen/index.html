@@ -4,16 +4,17 @@
 <div id="container" class="pure-g-r">
 <!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->
 	<header id="logo-container">
-		<div id="logo-text"><a href="/blog" title="goto Blog main page">Zen Notes</a></div>
+		<div id="logo-text"><a href="/blog/" title="goto Blog main page">Zen Notes</a></div>
 		<div id="logo-subtext">Cogitatio materialis est</div>
 	</header>
 
 	{% include 'navigation.html' %}
 
 
-	<!-- B L O C K   W I T H   P O S T -->
+	<!-- THE BLOCK   W I T H   P O S T S -->
 	<div id="content">
 
+	<div id="tags-cloud">{{ generate_tags_cloud() }}</div>
 
 {% if current_page.title == 'Welcome' %}
 	<!-- P O S T   L O O P -->
