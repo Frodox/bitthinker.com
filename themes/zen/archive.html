@@ -1,4 +1,4 @@
-{% include 'header.html' %}
+{% include 'head_part.html' %}
 
 <body>
 <div id="container" class="pure-g-r">
@@ -10,9 +10,15 @@
 
 	{% include 'navigation.html' %}
 
+
 	<div id="content" class="archive-content">
 		<div class="post">
-			<h1>{{ meta.title }}</h1>
+			<h2>Tags cloud</h2>
+			<div class="tags-cloud">{{ generate_tags_cloud() }}</div>
+		</div>
+
+		<div class="post">
+			<h2>{{ meta.title }}</h2>
 
 			<ol reversed="reversed">
 
@@ -25,12 +31,8 @@
 			{% endfor %}
 
 			</ol>
-			<br>
 		</div>
 	</div> <!-- content -->
 </div> <!-- container -->
 
 {% include 'footer.html' %}
-
-</body>
-</html>

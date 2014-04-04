@@ -44,13 +44,21 @@ h4 { font-size: 1.25em; margin: 1em 0 0.5em 0 }
 h5 { font-size:0.83em; /*margin:1.67em 0*/}
 h6 { font-size:0.67em;/*margin:2.33em 0*/}
 
+
+/*********** ARCHIVE **********************************************************/
 h4.archive-item-header {
 	margin: 0 0 0.2em 0;
 }
-
 #container div.archive-content {
 	width: 900px;
 }
+#container div.archive-content ol {
+	margin-bottom: 0;
+}
+#container div.archive-content h2 {
+	text-align: center;
+}
+/*****************************************************************************/
 
 #content, body > footer .inner {
 	width: 800px;
@@ -141,10 +149,10 @@ nav a, nav a:visited { color: #aaa }
 }
 
 
-/*** P O S T **************************************************************************************/
+/*** P O S T ******************************************************************/
 .post {
 	margin:  2em 0 0 0;
-	padding: 0 1em 0 1em;
+	padding: 0 1em 1em 1em;
 	font-size: 0.9em;
 	overflow-x: hidden;
 	background-color: white;
@@ -168,7 +176,7 @@ nav a, nav a:visited { color: #aaa }
 
 /***** M E T A ********/
 .post .meta, .meta-date-archive {
-	margin: 1em 0;
+	margin: 1em 0 0 0;
 /*
 	text-align: center;
 */

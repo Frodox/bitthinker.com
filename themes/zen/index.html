@@ -1,4 +1,4 @@
-{% include 'header.html' %}
+{% include 'head_part.html' %}
 
 <body>
 <div id="container" class="pure-g-r">
@@ -14,7 +14,6 @@
 	<!-- THE BLOCK   W I T H   P O S T S -->
 	<div id="content">
 
-	<div id="tags-cloud">{{ generate_tags_cloud() }}</div>
 
 {% if current_page.title == 'Welcome' %}
 	<!-- P O S T   L O O P -->
@@ -22,16 +21,8 @@
 	{% for page in pages %}
 	{% if page.meta.date %}
 
-		<div class="post">
+		{% include 'post_preview_loop.html' %}
 
-			<h2><a href="{{ page.url }}">{{ page.meta.title }}</a></h2>
-			<div class="excerpt">{{ page.content|custom_post_preview }}</div>
-
-			<div class="meta">
-				<span class="meta-date">{{ page.meta.date|date(config.date_format) }}</span>
-				{% if page.meta.tags %}<span class="meta-tags">Tags: {{ page.meta.tags }}</span>{% endif %}
-			</div>
-		</div>
 	{% endif %}
 	{% endfor %}
 
@@ -44,13 +35,19 @@
 
 			<div class="meta">
 
-				{% if meta.date %}
+			{% if meta.date %}
 				<span class="meta-date">{{ meta.date|date(config.date_format) }}</span>
-				{% endif %}
+			{% endif %}
 
-				{% if meta.tags %}
-				<span class="meta-tags">Tags: {{ meta.tags }}</span>
-				{% endif %}
+
+
+			{% if meta.tags_array %}
+				<span class="meta-tags">Tags: 
+				{% for tag in meta.tags_array %}
+					<a href="{{ base_url }}/tag/{{ tag }}">#{{ tag }}</a>
+				{% endfor %}
+				</span>
+			{% endif %}
 
 			</div>
 
@@ -64,15 +61,13 @@
 	<!-- Comments -->
 	{% include 'comments.html' %}
 
-
 {% endif %}
+
 
 	<!-- E N D  P O S T -->
 {% endif %}
 	</div> <!-- content -->
 </div> <!-- container -->
 
-{% include 'footer.html' %}
 
-</body>
-</html>
+{% include 'footer.html' %}

@@ -1,0 +1,30 @@
+{% include 'head_part.html' %}
+
+<body>
+<div id="container" class="pure-g-r">
+<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->
+	<header id="logo-container">
+		<div id="logo-text"><a href="/blog/" title="goto Blog main page">Zen Notes</a></div>
+		<div id="logo-subtext">Cogitatio materialis est</div>
+	</header>
+
+	{% include 'navigation.html' %}
+
+
+	<!-- THE BLOCK   W I T H   P O S T S -->
+	<div id="content">
+
+	<h2>Posts tagged #{{ current_tag }}:</h2>
+
+	{% for page in pages %}
+
+		{% if page.meta.tags_array and current_tag in page.meta.tags_array %}
+			{% include 'post_preview_loop.html' %}
+		{% endif %}
+
+	{% endfor %}
+
+	</div> <!-- content -->
+</div> <!-- container -->
+
+{% include 'footer.html' %}
