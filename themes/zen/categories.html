@@ -1,6 +1,7 @@
 <html>
 <head>
 	<title>{{ meta.title }}</title>
+	<meta name="robots" content="noindex">
 </head>
 <body>
 	<!-- current page: -->
@@ -14,17 +15,14 @@
 
 	<p>Articles in category: {{ meta.title }} </p>
 	<ul>
-        {# loop through all the pages #}
         {% for page in pages %}
-
-            {# show only pages that match this page URL structure #}
-            {# and don't show the index file in this folder #}
-            {# and in subfolders (doesn't end with 'index' )#}
-
 		{% if u in page.url and page.url[-5:] != 'index' %}
 
-			<li><a href="{{base_url}}/{{ page.url }}">{{ page.title }}</a></li>
+		    {# show only pages that match this page URL structure
+		       and don't show the index file in this folder 
+		       and in subfolders (doesn't end with 'index' ) #}
 
+			<li><a href="{{ base_url }}/{{ page.url }}">{{ page.title }}</a></li>
 		{% endif %}
 
 	{% endfor %}
