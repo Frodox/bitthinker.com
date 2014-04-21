@@ -2,10 +2,7 @@
 
 namespace Phile\Model;
 use Phile\Event;
-use Phile\Parser\ParserInterface;
-use Phile\Registry;
 use Phile\ServiceLocator;
-use Phile\Utility;
 
 /**
  * the Model class for a page
@@ -14,7 +11,7 @@ use Phile\Utility;
  */
 class Page {
 	/**
-	 * @var Meta the meta model
+	 * @var \Phile\Model\Meta the meta model
 	 */
 	protected $meta;
 
@@ -34,7 +31,7 @@ class Page {
 	protected $rawData;
 
 	/**
-	 * @var ParserInterface
+	 * @var \Phile\ServiceLocator\ParserInterface
 	 */
 	protected $parser;
 
@@ -44,9 +41,10 @@ class Page {
 	protected $url;
 
 	/**
-	 * @param $filePath
+	 * @param        $filePath
+	 * @param string $folder
 	 */
-	public function __construct($filePath) {
+	public function __construct($filePath, $folder = CONTENT_DIR) {
 		$this->filePath = $filePath;
 
 		/**
@@ -66,7 +64,7 @@ class Page {
 		 * @param \Phile\Model\Page page the page model
 		 */
 		Event::triggerEvent('after_load_content', array('filePath' => &$this->filePath, 'rawData' => $this->rawData, 'page' => &$this));
-		$this->url  = str_replace(CONTENT_DIR, '', $this->filePath);
+		$this->url  = str_replace($folder, '', $this->filePath);
 		$this->url  = str_replace(CONTENT_EXT, '', $this->url);
 		$this->url  = str_replace(DIRECTORY_SEPARATOR, '/', $this->url);
 		if (strpos($this->url, '/') === 0) {
@@ -114,12 +112,19 @@ class Page {
 	 * parse the raw content
 	 */
 	protected function parseRawData() {
-		$this->meta     = new Meta($this->rawData);
-		// Remove only the first block comment
+		$this->meta = new Meta($this->rawData);
+		// Remove only the optional, leading meta-block comment
 		$rawData = trim($this->rawData);
-		$END    = (substr($rawData, 0, 2) == '/*') ? '*/' : '-->';
-
-		$this->content = substr($this->rawData, strpos($rawData, $END)+strlen($END));
+		if(strncmp('<!--', $rawData, 4) === 0) {
+			// leading meta-block comment uses the <!-- --> style
+			$this->content = substr($rawData, max(4, strpos($rawData, '-->') + 3));
+		} elseif(strncmp('/*', $rawData, 2) === 0) {
+			// leading meta-block comment uses the /* */ style
+			$this->content = substr($rawData, strpos($rawData, '*/') + 2);
+		} else {
+			// no leading meta-block comment
+			$this->content = $rawData;
+		}
 	}
 
 	/**
