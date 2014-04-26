@@ -12,11 +12,14 @@
 
 
 	<!-- THE BLOCK   W I T H   P O S T S -->
+
 	<div id="content">
+
 
 
 {% if current_page.title == 'Welcome' %}
 	<!-- P O S T   L O O P -->
+
 
 	{% for page in pages %}
 	{% if page.meta.date %}
@@ -25,6 +28,7 @@
 
 	{% endif %}
 	{% endfor %}
+
 
 
 {% else %}

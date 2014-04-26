@@ -63,13 +63,23 @@ h4.archive-item-header {
 div.tags-cloud {
 	text-align:center;
 }
-div.tags-cloud a {
+div.tags-cloud a.tag {
 	border: 1px solid #ddd;
 	padding: 0 5px 0 5px;
 	line-height: 1.5em;
 	display: inline-block;
 	margin: 3px;
 	border-radius: 3px;
+}
+
+div.tags-cloud a.tag:hover {
+	background-color: #FFFFEC;
+	border: 1px solid #008d8d;
+	-webkit-transition: all 0.2s;
+	-moz-transition: all 0.2s;
+	-ms-transition: all 0.2s;
+	-o-transition: all 0.2s;
+	transition: all 0.2s;
 }
 
 /*****************************************************************************/
