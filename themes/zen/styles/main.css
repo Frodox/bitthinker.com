@@ -37,12 +37,12 @@ h3 a, h3 a:visited
 }
 h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover { color:#008d8d; }
 
-h1 { font-size: 2.5em;/*margin:.67em 0*/}
-h2 { font-size: 2.0em; margin: 1em 0 0.5em 0 }
-h3 { font-size: 1.5em; margin: 1em 0 0.5em 0 }
-h4 { font-size: 1.25em; margin: 1em 0 0.5em 0 }
+h1 { font-size: 2.5em; /*margin:.67em 0*/}
+h2 { font-size: 2.0em;   margin: 1em 0 0.5em 0 }
+h3 { font-size: 1.5em;   margin: 1em 0 0.5em 0 }
+h4 { font-size: 1.25em;  margin: 1em 0 0.5em 0 }
 h5 { font-size:0.83em; /*margin:1.67em 0*/}
-h6 { font-size:0.67em;/*margin:2.33em 0*/}
+h6 { font-size:0.67em; /*margin:2.33em 0*/}
 
 
 /*********** ARCHIVE **********************************************************/
@@ -58,6 +58,20 @@ h4.archive-item-header {
 #container div.archive-content h2 {
 	text-align: center;
 }
+
+/* Tags Cloud */
+div.tags-cloud {
+	text-align:center;
+}
+div.tags-cloud a {
+	border: 1px solid #ddd;
+	padding: 0 5px 0 5px;
+	line-height: 1.5em;
+	display: inline-block;
+	margin: 3px;
+	border-radius: 3px;
+}
+
 /*****************************************************************************/
 
 #content, body > footer .inner {
