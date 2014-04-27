@@ -1,0 +1,27 @@
+# Makefile to convert a batch of odg diagrams to pdf with same name
+# Christian (c) 2014
+# GPL v3
+
+SOURCES = $(wildcard *.odg)
+TARGETS = $(SOURCES:.odg=.pdf)
+
+LIBREOFFICE_PID = $(shell pidof soffice.bin)
+
+# we can convert odg to pdf with:
+# * libreoffice --convert-to pdf
+# * cups-printer
+# * unoconv
+
+%.pdf:%.odg
+
+ifneq ("", "$(LIBREOFFICE_PID)")
+	$(error "Please, close all LibreOffice instances ($(LIBREOFFICE_PID)) to continue")
+endif
+	libreoffice --headless --convert-to pdf "$^"
+
+all: $(TARGETS)
+
+clean:
+	rm -f $(TARGETS)
+pdf:%.odg
+
