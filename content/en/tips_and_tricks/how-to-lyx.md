@@ -2,7 +2,7 @@
 Title: LyX tips and tricks
 Description: Most common problems and hacks I have ever faced
 Date: 2014/02/25
-Tags: LyX, tips and tricks
+Tags: lyx, tips and tricks
 -->
 
 In this article I will describe interesting hack and possibilities which I use 

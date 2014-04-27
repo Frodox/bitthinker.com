@@ -2,7 +2,7 @@
 Title: How to run java from command line?
 Description: Java and the Linux Command Line
 Date: 2013/11/10
-Tags: Java, development
+Tags: java, development
 -->
 
 This document instructs you on how to use the Linux shell with Java<!--cut-here-->.

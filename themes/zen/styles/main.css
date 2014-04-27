@@ -66,9 +66,8 @@ div.tags-cloud {
 div.tags-cloud a.tag {
 	border: 1px solid #ddd;
 	padding: 0 5px 0 5px;
-	line-height: 1.5em;
 	display: inline-block;
-	margin: 3px;
+	margin: 2px;
 	border-radius: 3px;
 }
 

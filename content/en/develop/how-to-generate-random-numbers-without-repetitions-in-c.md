@@ -2,7 +2,7 @@
 Title: Generate random array without repetitions in&nbsp;C&nbsp;?
 Description: How to generate random numbers without repetitions in C
 Date: 2013/12/14
-Tags: C, developing, alghoritms
+Tags: c, development, algorithms
 -->
 
 <!-- http://www.wasm.ru/forum/viewtopic.php?pid=189777#p189777 -->
