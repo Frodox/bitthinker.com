@@ -11,7 +11,7 @@
 	{% if page.meta.tags_array %}
 		<span class="meta-tags">Tags:
 		{% for tag in page.meta.tags_array %}
-			<a href="{{ base_url }}/tag/{{ tag }}" style='tag'>#{{ tag }}</a>
+			<a href="{{ base_url }}/tag/{{ tag|url_encode }}" style='tag'>#{{ tag }}</a>
 		{% endfor %}
 		</span>
 	{% endif %}
