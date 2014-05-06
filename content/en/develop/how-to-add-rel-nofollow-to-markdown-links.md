@@ -92,7 +92,7 @@ $content = mb_convert_encoding($tmp, $content_ecoding, 'HTML-ENTITIES');
 #### Cons
 
 ```diff
-- `saveHTML()` method will complement your code to *correct* html, with DOCTYPE, all closed tags and so on. Is it desired behaviore for you?
+- `saveHTML()` method will complement your code to *correct* html, with DOCTYPE, all closed tags and so on. Is it desired behaviour for you?
 - If you use not-latin text, you should encode it explicitly into html-enteties and then back. If you use some html-code examples encoded into 'html-enteties', they will become back just html
 ```
 
@@ -118,7 +118,7 @@ There are two functions:
 
 for links-reference and inline-links respectively.
 
-> *NOTE*: actually, there are 4 functins, 2 for php-markdown and 2 for php-markdownExtra with a little bit difference. Patch the one you are using.
+> *NOTE*: actually, there are 4 functins, 2 for php-markdown and 2 for php-markdownExtra. Edit the one you are using.
 
 Since I use php-markdownExtra, I edited [this][3] and [this][4] one function.
 
@@ -182,6 +182,7 @@ index 088b7cd..1210fc0 100644
 
 ```diff
 - need to edit parser core
+- cannot use full URL for your site inside articles (just relative, `/content...` )
 ```
 
 ---
