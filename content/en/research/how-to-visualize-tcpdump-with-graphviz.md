@@ -225,6 +225,6 @@ One of resulting images (svg; may be useful to open in new tab):
 
 [tcp2graphviz-script]: /blog/content/en/research/imgs/src/tcp2graphviz.sh
 "tcp2graphviz script"
-[tcp2graphviz-github]: https://github.com/Jecomire/mephi_labs/tree/master/4th-year/tcpdump_visualisation (tcp2graphviz on github)
+[tcp2graphviz-github]: %github%/mephi_labs/tree/master/4th-year/tcpdump_visualisation (tcp2graphviz on github)
 [makefile]: /blog/content/en/research/imgs/src/Makefile
 "Universal Makefile"

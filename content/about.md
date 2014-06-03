@@ -18,6 +18,6 @@ You can [email][email] me with any questions, suggestions or comments.
 I also have a [Flickr][flickr] and a public [GitHub repository][github]. 
 
 
-[email]:   mailto:Christian@bitthinker.com (Write an e-mail)
-[flickr]:  http://www.flickr.com/photos/frodox/
-[github]:  https://github.com/Jecomire
+[email]:   mailto:%e-mail% (say Hello via e-mail)
+[flickr]:  %flickr%
+[github]:  %github%

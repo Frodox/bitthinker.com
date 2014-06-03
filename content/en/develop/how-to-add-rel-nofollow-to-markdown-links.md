@@ -201,10 +201,10 @@ Inspired by [this][1] answer on SO.
 [4]:https://github.com/michelf/php-markdown/blob/efcf20752db06533b04b450e1ad117c25fd4e41a/Michelf/Markdown.php#L2313
 (function _doAnchors_inline_callback, line: 2313)
 
-[phileCustomizeLinks]:https://github.com/Jecomire/phileCustomizeLinks/blob/master/plugin.php
+[phileCustomizeLinks]:%github%/phileCustomizeLinks/blob/master/plugin.php
 
 [pico-git]:https://github.com/gilbitron/Pico
 
 [phile-git]:https://github.com/PhileCMS/Phile
 
-[my-github-commit]:https://github.com/Jecomire/php-markdown/commit/66d3da7c2c95aab1ff97b6d114d36eceaf9ff44f
+[my-github-commit]:%github%/php-markdown/commit/66d3da7c2c95aab1ff97b6d114d36eceaf9ff44f
