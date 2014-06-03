@@ -4,3 +4,6 @@
 [submodule "plugins/phileTagsCloud"]
 	path = plugins/phileTagsCloud
 	url = git@github.com:Jecomire/phileTagsCloud.git
+[submodule "plugins/phileContentVariables"]
+	path = plugins/phileContentVariables
+	url = git@github.com:PhileCMS/phileContentVariables.git
