@@ -3,7 +3,7 @@ Title: /about
 Type: service
 -->
 
-Hello, I am Christian Evans. I am a software engineer and a photographer.
+Hello, I am Vit Ry. I am a software engineer and a photographer.
 
 ## About this blog
 
