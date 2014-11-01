@@ -120,7 +120,9 @@ AcceptEnv LC_IDENTIFICATION LC_ALL
 Это те параметры, что настраиваются в конфигурационном файле sshd.
 После изменения настроек требуется перезапустить сервис sshd.
 
-При использовании авторизации по ключу, ключ требуется **предварительно**
+### Комментарии
+
+* При использовании авторизации по ключу, ключ требуется **предварительно**
 сгенерировать на клиентской машине и скопировать публичный ключ на сервер.
 **Пример:**
 ```
@@ -128,7 +130,7 @@ client $ ssh-keygen
 client $ cat ~/.ssh/id_rsa.pub | ssh -p 5679 ivan@serverurl.com "cat >> ~/.ssh/authorized_keys"
 ```
 
-В файле `/var/log/auth.log` будут находиться сообщения от **sshd**. В случае,
+* В файле `/var/log/auth.log` будут находиться сообщения от **sshd**. В случае,
 если этот файл отсутствует, вам требуется настроить вашу систему логирования.
 [Вот здесь][gentoo-syslog] пример для `syslog` и `syslon-ng`.
 Я использую `syslog-ng`, и мне потребовалось добавить следующие строки
@@ -139,6 +141,21 @@ log { source(src); destination(authlog); };
 ```
 и перезапустить сервис `syslog-ng`.
 
+* При использовании нестандартного порта может потребоваться настроить ваш firewall
+(iptables, firewalld, etc).  
+**Пример** настройки для iptables:
+```
+root# iptables -A INPUT -p tcp -m state --state NEW,ESTABLISHED --dport 5679 -j ACCEPT
+root# service iptables save
+root# iptables -L -n
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+ACCEPT     icmp --  0.0.0.0/0            0.0.0.0/0           
+ACCEPT     tcp  --  0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:22 
+ACCEPT     tcp  --  0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:80 
+ACCEPT     tcp  --  0.0.0.0/0            0.0.0.0/0           state NEW,ESTABLISHED tcp dpt:5679
+...
+```
 
 ### Если этого мало
 
