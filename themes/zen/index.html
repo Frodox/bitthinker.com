@@ -17,8 +17,7 @@
 
 
 
-{% if current_page.title == 'Welcome' %}
-	<!-- P O S T   L O O P -->
+{% if current_page.title == 'Welcome' %} <!-- P O S T   L O O P -->
 
 
 	{% for page in pages %}
@@ -30,9 +29,8 @@
 	{% endfor %}
 
 
+{% else %} <!-- O N E   P O S T -->
 
-{% else %}
-	<!-- O N E   P O S T -->
 
 		<div class="post">
 			<h1>{{ meta.title }}</h1>
