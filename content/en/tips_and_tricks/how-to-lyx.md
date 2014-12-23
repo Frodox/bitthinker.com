@@ -72,7 +72,7 @@ Of course, you can use this hack for any item in numbered list.
 * * * 
 
 
-## How to rotate a page?
+## How to rotate a specific page ?
 
 To rotate page, just add package `\usepackage{pdflscape}` in Document LaTeX Preamble
 and then:
@@ -82,7 +82,6 @@ and then:
 3. add `\end{landscape}` as TeX-code at the end of the needed page.
 
 Then *marked* page will be in *landscape* rotation.
-
 
 
 * * *
@@ -100,10 +99,16 @@ I will describe here the most common. Go to *Document* -> *Settings...* -> *LaTe
 ```
 
 
+* * *
+
+
+## How to skip page number on some pages ?
+
+* At the end of the page that you want to be clear (most of time it is title page)
+insert following TeX-code(`[Ctrl+L]`): `\thispagestyle{empty}`
 
 
 ***
-
 
 
 #### References:
