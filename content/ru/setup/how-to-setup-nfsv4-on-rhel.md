@@ -19,6 +19,10 @@ http, ftp, ssh, samba, nfs и другие. (NFS)[https://ru.wikipedia.org/wiki/
 ```bash
 yum install nfs-utils nfs-libs
 
+** iptables*!!!
+/etc/sysconfig/iptables
+-A INPUT -p tcp -m state --state NEW,ESTABLISHED -m tcp --dport 2049 -j ACCEPT
+
 chkconfig 35 rpcbind on
 chkconfig 35 nfs on
 
@@ -50,12 +54,15 @@ chkconfig 35 nfs on
 /etc/init.d/nfs restart
 
 $ showmount -e <server_ip>
+
 Export list for <server_ip>:
 /export/subfolder *
 /export           *
 
 mkdir -p /mnt/nfs
 chown -R nfsnobody:nfsnobody /mnt/nfs
+
+reboot
 
 mount -t nfs4 -o rw,soft <server_ip>:/ /mnt/nfs
 ```
@@ -68,4 +75,15 @@ mount -t nfs4 -o rw,soft <server_ip>:/ /mnt/nfs
 * show more mount opts (also `rzise,vsize`)
 * list *all* subfolders that you want to import in `/etc/exports`
 
+### Problems
 
+* big uids : reboot
+* file not exist
+** setup server as nfsv4 and mount root
+** mount as nfs (`-t nfs`)
+
+### iptables solution here:
+
+* http://mylinuxlife.com/setting-up-nfs-on-rhel-6-iptables-firewall-solution/
+* http://nixcraft.com/showthread.php/16729-Linux-NFS4-client-unable-to-mount-share/page2?s=e798fd54314a4dc7d33bf1531fabdb9e
+* http://www.k-max.name/linux/network-file-system-nfs/
