@@ -23,8 +23,8 @@ yum install nfs-utils nfs-libs
 /etc/sysconfig/iptables
 -A INPUT -p tcp -m state --state NEW,ESTABLISHED -m tcp --dport 2049 -j ACCEPT
 
-chkconfig 35 rpcbind on
-chkconfig 35 nfs on
+chkconfig rpcbind on
+chkconfig nfs on
 
 # you can bind subfolders
 mkdir -p /export/test
@@ -87,3 +87,8 @@ mount -t nfs4 -o rw,soft <server_ip>:/ /mnt/nfs
 * http://mylinuxlife.com/setting-up-nfs-on-rhel-6-iptables-firewall-solution/
 * http://nixcraft.com/showthread.php/16729-Linux-NFS4-client-unable-to-mount-share/page2?s=e798fd54314a4dc7d33bf1531fabdb9e
 * http://www.k-max.name/linux/network-file-system-nfs/
+
+Mount via /etc/fstab:
+https://www.centos.org/docs/5/html/5.1/Deployment_Guide/s2-nfs-fstab.html
+common mmount ots: https://www.centos.org/docs/5/html/5.1/Deployment_Guide/s1-nfs-client-config-options.html
+
