@@ -116,9 +116,9 @@ There are several layout programs for drawing graphs, like
 
 #### Basic args fot `dot`
 
-* `-Txxx` : xxx  is  an unlikely format to convert. Supported formats: `ps, svg, png, gif` and so on.
-* `-Klayout` : use diffrenet layout (dot, neato, circo, fdp ...)
-* `-o outfile` : output file
+* `-T <xxx>` : xxx  is  a likely format to convert (`ps, svg, png, gif` and so on)
+* `-K <layout>` : use diffrenet layout (dot, neato, circo, fdp ...)
+* `-o <outfilename.extension>` : output file path and extension
 
 There're good official tutorials for beginners
 for [`dot`][dot-tutor] and [`neato`][neato-tutor].
@@ -141,31 +141,24 @@ There're some existing solution for this problem, like [this][NTV] or [this][aft
 but in my case (if you already have a tcpdump log to visualize) they were too complex
 or didn't work at all. So, I write it by myself.
 
-I grep IPv4 and put them in a graphviz-dot file format like this:
+Here is snippet how to grep IPv4 and put them in a .dot file format
 
 ```bash
-grep -E "IP\ " $FILE | awk ' BEGIN { e="(([0-9]{1,3}.){3})([0-9]{1,3}).*" }
+grep -E -- "IP\ " "$FILE" | awk ' BEGIN { e="(([0-9]{1,3}.){3})([0-9]{1,3}).*" }
 {
     printf "\"%s\" -> \"%s\";\n", gensub(e, "\\1\\3", "1", $3), gensub(e, "\\1\\3", "1", $5)
-}' >> $TMP 
+}' >> "$TMP"
 ```
 
-And IPv6:
-
-```bash
-grep -E "IP6" $FILE | awk 'BEGIN { e="(([0-9a-fA-F:]{1,5}){1,5}):([0-9a-fA-F]{1,4}).*" }
-{
-    printf "\"%s\" -> \"%s\";\n", gensub(e, "\\1:\\3", "1", $3), gensub(e, "\\1:\\3", "1", $5)
-}' >> $TMP
-```
-
-Since there is no sense to post here all the code, you can download the [tcp2graphviz script here][tcp2graphviz-script] (and on [github][tcp2graphviz-github]).
+There is no sense to post here all the code. Please, download it from
+[github page][tcp2graphviz-github].  
+**And there is also basic usage example**.
 
 
 
 ### Render
 
-Now, we have 2 files with IPv4 and IPv6 which we can convert into image/pdf/svg/etcs.
+Now, we have 2 files with IPv4 and IPv6 which can be converted into img/pdf/svg/etcs.
 IPv4 one looks like:
 
 ```bash
@@ -223,8 +216,6 @@ One of resulting images (svg; may be useful to open in new tab):
 ( Network-Traffic-Visualization)
 [afterglow]: https://github.com/zrlram/afterglow (afterglow)
 
-[tcp2graphviz-script]: /blog/content/en/research/imgs/src/tcp2graphviz.sh
-"tcp2graphviz script"
 [tcp2graphviz-github]: %github%/mephi_labs/tree/master/4th-year/tcpdump_visualisation (tcp2graphviz on github)
 [makefile]: /blog/content/en/research/imgs/src/Makefile
 "Universal Makefile"
